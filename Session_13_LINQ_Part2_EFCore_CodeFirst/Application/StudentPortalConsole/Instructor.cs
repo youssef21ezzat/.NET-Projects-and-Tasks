@@ -45,7 +45,8 @@ namespace StudentPortalConsole
         public int Id { get; set; }
         public string FullName { get; set; } = "";
         public int YearsOfExperience { get; set; }
-        public string? AssignedCourseName { get; set; }
+        
+        public List<Course> Courses { get; set; } = new();
     }
 
     #region 📋 Full TODO Checklist (collapse this region for a quick overview)

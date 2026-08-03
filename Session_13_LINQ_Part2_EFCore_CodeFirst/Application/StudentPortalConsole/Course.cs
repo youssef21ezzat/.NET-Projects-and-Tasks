@@ -37,14 +37,18 @@
 // tried it yourself, or you're checking your own work), see:
 // ../StudentPortalConsole_Complete/Course.cs
 // =====================================================================
-
+using System.ComponentModel.DataAnnotations;
 namespace StudentPortalConsole
 {
     public class Course
     {
         public int Id { get; set; }
+        [Required] 
+        [MaxLength(150)]
         public string CourseName { get; set; } = "";
         public int Credits { get; set; }
+        public int InstructorId { get; set; } 
+        public Instructor Instructor { get; set; }
     }
 
     #region 📋 Full TODO Checklist (collapse this region for a quick overview)

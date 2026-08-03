@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentPortalConsole;
 
@@ -10,9 +11,11 @@ using StudentPortalConsole;
 namespace StudentPortalConsole.Migrations
 {
     [DbContext(typeof(StudentPortalContext))]
-    partial class StudentPortalContextModelSnapshot : ModelSnapshot
+    [Migration("20260803205000_AddInstructorCourseRelationship")]
+    partial class AddInstructorCourseRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

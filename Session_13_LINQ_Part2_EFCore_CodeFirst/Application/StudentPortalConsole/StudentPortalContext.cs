@@ -21,6 +21,26 @@ namespace StudentPortalConsole
                 .LogTo(Console.WriteLine , LogLevel.Information)
                 .EnableSensitiveDataLogging();
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+
+            modelBuilder.Entity<Student>()
+                .Property(s => s.FullName)
+
+                .HasMaxLength(110);
+            modelBuilder.Entity<Course>()
+                .Property(s => s.CourseName)
+
+                .HasMaxLength(120);
+            modelBuilder.Entity<Course>()
+                .HasOne(i => i.Instructor)
+                .WithMany(c => c.Courses)
+                .HasForeignKey(c => c.InstructorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+        }
+        
 
     }
 }

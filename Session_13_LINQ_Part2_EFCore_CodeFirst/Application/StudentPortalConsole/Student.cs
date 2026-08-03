@@ -54,9 +54,12 @@ namespace StudentPortalConsole
     // `Id` becomes an auto-incrementing PRIMARY KEY purely by EF's
     // naming convention — nobody writes PRIMARY KEY anywhere.
     // =================================================================
+    using System.ComponentModel.DataAnnotations;
     public class Student // class = table
     {
         public int Id { get; set; } // property = column  // StudentId or Id
+        [Required] 
+        [MaxLength(100)]
         public string FullName { get; set; } = ""; 
         public int YearOfStudy { get; set; }
         public double Gpa { get; set; }

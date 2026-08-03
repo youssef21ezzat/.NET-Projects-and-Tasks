@@ -1,0 +1,6 @@
+﻿CREATE TABLE Courses
+(
+    Id INT IDENTITY PRIMARY KEY,
+    CourseName NVARCHAR(150) NOT NULL,
+    Credits INT NOT NULL
+);
