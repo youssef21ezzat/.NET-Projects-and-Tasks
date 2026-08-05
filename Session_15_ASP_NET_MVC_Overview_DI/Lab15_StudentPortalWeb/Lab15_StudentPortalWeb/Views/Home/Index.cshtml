@@ -1,0 +1,144 @@
+﻿@model List<Student>
+
+@{
+    ViewData["Title"] = "Student Portal";
+}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">
+            Student Portal
+        </h1>
+
+        <p class="text-muted mb-1">
+            Student Information Dashboard
+        </p>
+
+        <span class="badge bg-primary px-3 py-2">
+            Build #1
+        </span>
+    </div>
+
+
+    <!-- Lifetime Experiment -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-success text-white py-3">
+            <h4 class="mb-0">
+                Lifetime Experiment
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row text-center">
+
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <small class="text-muted d-block">
+                        Owner
+                    </small>
+
+                    <strong>
+                        @ViewBag.Owner
+                    </strong>
+                </div>
+
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <small class="text-muted d-block">
+                        Stamp A
+                    </small>
+
+                    <span class="badge bg-primary fs-6">
+                        @ViewBag.StampA
+                    </span>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-muted d-block">
+                        Stamp B
+                    </small>
+
+                    <span class="badge bg-primary fs-6">
+                        @ViewBag.StampB
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Students Card -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-dark text-white py-3">
+            <h4 class="mb-0">
+                Students
+            </h4>
+        </div>
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">#</th>
+                            <th>Full Name</th>
+                            <th>Year of Study</th>
+                            <th>GPA</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var student in Model.Select((student, index) => new { student, index }))
+                        {
+                            <tr>
+
+                                <td class="ps-4 text-muted">
+                                    @(student.index + 1)
+                                </td>
+
+                                <td class="fw-semibold">
+                                    @student.student.FullName
+                                </td>
+
+                                <td>
+                                    <span class="badge bg-secondary">
+                                        Year @student.student.YearOfStudy
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <strong>
+                                        @student.student.Gpa.ToString("F2")
+                                    </strong>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer bg-white text-muted">
+            Total Students:
+            <strong>@Model.Count</strong>
+        </div>
+
+    </div>
+
+</div>
