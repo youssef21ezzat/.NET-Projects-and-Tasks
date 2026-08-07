@@ -1,0 +1,95 @@
+@model Student
+@* LAB 18 — Lab ID: 34 | CHIP_YEAR = 3 | CHIP_LABEL = Year 3 *@
+@* Model means one Student in _StudentRow.cshtml because the partial is rendered inside a loop in Index.cshtml, where each iteration passes a single Student object to it, whereas Index.cshtml receives the entire List<Student> from the controller. *@
+@*
+    Views/Shared/_StudentRow.cshtml — SESSION PROJECT
+    Session 18 — TODO 5 (Block 3), TODO 6 (Block 4), TODO 9 (Block 5)
+
+    A PARTIAL VIEW is an ordinary .cshtml file that renders a FRAGMENT of
+    a page instead of a whole page. It has no layout, no <html>, no
+    <body> — just the piece. The underscore at the front of the file name
+    is a convention meaning "this is not a page in its own right"; the
+    same convention you have already seen on _Layout and _ViewImports.
+
+    It lives in Views/Shared/ because Shared means "any controller's
+    views may use this". Put it in Views/Students/ and only the Students
+    views could find it.
+
+    ⚠️ THIS FILE IS DELIBERATELY ALMOST EMPTY. It renders nothing until
+    TODO 5 is done, which means the roster's table body will be blank the
+    moment TODO 4 starts calling it and before TODO 5 fills it in. That
+    order is on purpose — Block 3 wants you to see the hole before you
+    fill it.
+*@
+
+@*
+    TODO 5: Build the partial.
+
+            First line of the file, above everything: declare what type
+            of object this partial expects to be handed, using the same
+            Razor directive every other view in this project already
+            starts with — an at-sign, the word model, then the type. The
+            type here is ONE student, not a list, because a partial that
+            renders one row should be handed one row's worth of data.
+
+            Then, below it, write the markup for exactly one table row:
+            an opening row tag, four cells, a closing row tag. The four
+            cells hold the id, the full name as a link to that student's
+            detail page, the year of study, and the grade point average
+            formatted to two decimal places.
+
+            Copy nothing. Type it, and as you type notice that inside
+            this file the word Model means one student — where in
+            Index.cshtml the same word means the whole list. Same word,
+            different meaning, decided entirely by the model directive at
+            the top of each file.
+
+*@
+
+@*
+    TODO 6: (Block 4.) Replace the hand-typed URL in the name cell.
+
+            Right now that link's address is a piece of string you typed
+            yourself. Delete the whole href attribute and replace it with
+            three TAG HELPER attributes instead: one naming the
+            controller, one naming the action, and one supplying the
+            route value called id. All three start with the same
+            four-character prefix, and the third one has the route
+            value's name joined onto the end of that prefix with a
+            hyphen.
+            Run it, then VIEW PAGE SOURCE. The three attributes are gone
+            from the HTML that reached the browser and a plain href has
+            appeared in their place — built for you, from the route table
+            you designed in Session 16.
+*@
+
+@*
+    TODO 9: (Block 5 — do TODO 7 and TODO 8 first.) In the GPA cell,
+            replace the formatted number with your own tag helper: an
+            element whose name is the two words gpa and badge joined by a
+            hyphen, self-closing, with a single attribute called for
+            holding the student's grade point average.
+            ⚠️ That element does not exist in HTML. No browser has ever
+            heard of it. It works because TODO 7 wrote a class that
+            claims that element name, and TODO 8 told Razor where to look
+            for it — and Block 5 is about what that means.
+*@
+<tr>
+    <td>@Model.Id</td>
+    <td><a asp-controller="Students" asp-action="Details" asp-route-id="@Model.Id">@Model.FullName</a></td>
+    <td><year-chip for="@Model.YearOfStudy"/></td>
+    <td><gpa-badge for = "@Model.Gpa"/></td>
+</tr>
+
+@*
+    WHAT THE BROWSER RECEIVED:
+    <span title="rendered by youssef" class="badge bg-light text-dark">Year 1</span>
+    (or bg-warning for Year 3)
+
+    Symptoms of breaking it:
+    (a) Removing @addTagHelper from _ViewImports.cshtml: The browser renders the literal <year-chip> element as-is because Razor doesn't recognize it as a tag helper.
+    (b) Removing TagMode from Process: The output span might be rendered as self-closing <span />, which breaks HTML rendering and causes subsequent elements to nest inside it incorrectly.
+    (c) Renaming the element to yearchip (no hyphen): The tag helper won't execute, and the browser will render <yearchip> as an unknown HTML element.
+
+    What do all three failures have in common? All three failures result in the tag helper failing to execute, causing the browser to receive and render unrecognized custom HTML tags instead of the intended <span>.
+*@

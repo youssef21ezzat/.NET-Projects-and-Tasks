@@ -54,20 +54,7 @@ namespace Lab15_StudentPortalWeb
             app.UseAuthorization();
 
             app.MapStaticAssets();
-            app.Use(async (context, next) =>
-            {
-                Console.WriteLine($"[START] {context.Request.Path}");
-
-                if (context.Request.Path.Value?.Contains(ID.audit_path) == true)
-                {
-                    Console.WriteLine(
-                        $"[AUDIT] Youssef Ezzat saw a request for {context.Request.Path}");
-                }
-
-                await next.Invoke();
-
-                Console.WriteLine($"[END] {context.Request.Path}");
-            });
+            
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")

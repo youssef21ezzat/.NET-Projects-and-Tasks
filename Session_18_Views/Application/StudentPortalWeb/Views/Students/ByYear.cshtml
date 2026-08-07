@@ -1,0 +1,30 @@
+@model List<Student>
+@*
+    Views/Students/ByYear.cshtml — PRE-TYPED, NOT TODAY'S TOPIC.
+*@
+@{
+    ViewData["Title"] = "Students by Year";
+}
+
+<h1 class="display-5">Year @ViewData["Year"] Students</h1>
+<p class="lead">Reached through the route pattern <code>students/year/{year:int:range(1,4)}</code>.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Full Name</th>
+            <th>Year</th>
+            <th>GPA</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            @* If you omit the model attribute, the partial inherits the parent view's model (List<Student>). This would cause an InvalidOperationException (model type mismatch) because _StudentRow expects a single Student, not a List<Student>. *@
+            <partial name="_StudentRow" model="student" />
+        }
+    </tbody>
+</table>
+
+<a href="/students">Back to all students</a>

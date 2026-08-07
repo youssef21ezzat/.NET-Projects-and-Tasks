@@ -1,0 +1,13 @@
+@model Student
+
+@* Both partials expect a single Student, so a page could absolutely use both at once by passing the same Student object to both; they just render different HTML representations of the same data. *@
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.FullName</h5>
+        <p class="card-text">
+            Year: @Model.YearOfStudy <br />
+            GPA: <gpa-badge for="@Model.Gpa"></gpa-badge>
+        </p>
+    </div>
+</div>
